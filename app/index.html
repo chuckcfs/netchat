@@ -11,6 +11,15 @@
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     </head>
     <body>
-        <h1>Hello NetChat!!</h1>
+        <div class="container">
+            <aside id="app-sidebar" class="col-md-2">
+                <ul class="users-view" ui-view="usersView"></ul>
+            </aside>
+            <div id="main-container" class="col-md-10">
+                <div class="content-header" ui-view="contentHeader"></div>
+                <div class="content-body" ui-view="contentBody"></div>
+            </div>
+        </div>
+        <script data-main="js/main" src="bower_components/requirejs/require.js"></script>
     </body>
 </html>
