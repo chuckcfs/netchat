@@ -1,0 +1,16 @@
+{
+    "name"          : "NetChat",
+    "description"   : "Client application for the chat developed for the Tuts+ series in RESTful API with NodeJS and ExpressJS.",
+    "version"       : "1.0.0",
+    "private"       : true,
+    "dependencies"  : {
+        "angular"                       : "1.3.x",
+        "angular-cookies"               : "1.3.x",
+        "angular-resource"              : "1.3.x",
+        "angular-ui-bootstrap"          : "0.12.x",
+        "angular-ui-router"             : "0.2.x",
+        "bootstrap"                     : "3.3.x",
+        "blueimp-file-upload"           : "9.9.x",
+        "requirejs"                     : "2.1.x"
+    }
+}
