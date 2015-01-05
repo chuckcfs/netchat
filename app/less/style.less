@@ -1,7 +1,13 @@
+@import url( "rolicons.less" );
+
 /**********************
     GENERAL STYLES
 ***********************/
-body                                    { background-color: #eee; padding-top: 70px; }
+html                                    { height: 100%; }
+body                                    { height: 100%; background-color: #eee; padding-top: 50px; }
+#application-container                  { height: 100%; }
+#application-container > .row           { height: 100%; }
+.navbar                                 { margin-bottom: 0; }
 
 /**********************
     FORM STYLES
@@ -10,3 +16,11 @@ body                                    { background-color: #eee; padding-top: 7
 .form-signin .form-control              { height: auto; font-size: 16px; padding: 10px; }
 .form-signin input[type="email"]        { border-radius: 4px 4px 0 0; border-bottom: none; }
 .form-signin input[type="password"]     { border-radius: 0 0 4px 4px; margin-bottom: 15px; }
+
+/**********************
+    SIDEBAR STYLES
+***********************/
+#app-sidebar                            { height: 100%; padding-top: 20px; background-color: #fff; border-right: 1px solid #ddd; }
+.user-search                            { position: relative; }
+.user-search .icon-search               { color: #bbb; position: absolute; left: 7px; top: 7px; }
+.user-search .form-control              { padding-left: 30px; }

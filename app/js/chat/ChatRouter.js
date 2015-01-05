@@ -10,6 +10,10 @@ define( function ( require ) {
                 },
                 url     : '/',
                 views   : {
+                    'chatsList'         : {
+                        templateUrl     : 'partials/chat/list.html',
+                        controller      : 'ChatListCtrl'
+                    },
                     'contentBody'       : {
                         template        : '',
                         controller      : 'ChatBaseCtrl'

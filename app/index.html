@@ -31,11 +31,9 @@
                 </div>
             </div>
         </nav>
-        <div class="container-fluid">
+        <div id="application-container" class="container-fluid">
             <div class="row">
-                <aside id="app-sidebar" class="col-md-3">
-                    <ul class="users-view" ui-view="usersView"></ul>
-                </aside>
+                <aside id="app-sidebar" class="chats-list col-md-3" ui-view="chatsList"></aside>
                 <div id="main-container" class="col-md-9">
                     <div class="content-header" ui-view="contentHeader"></div>
                     <div class="content-body" ui-view="contentBody"></div>
