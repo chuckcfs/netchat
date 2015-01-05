@@ -9,16 +9,20 @@ define( function ( require ) {
     require( 'jQuery' );
     require( 'resource' );
     require( 'router' );
+    require( 'chat/ChatModule' );
     require( 'common/CommonModule' );
     require( 'session/SessionModule' );
+    require( 'user/UserModule' );
 
     var app         = angular.module( 'NetChat', [
         'config',
         'ngCookies',
         'ngResource',
         'ui.router',
+        'ChatModule',
         'CommonModule',
-        'SessionModule'
+        'SessionModule',
+        'UserModule'
     ]);
 
     app.run( [ '$rootScope', '$state', '$location', '$cookies', 'AuthService', 'SessionService', function ( $rootScope, $state, $location, $cookies, Auth, Session ) {

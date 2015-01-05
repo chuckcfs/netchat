@@ -9,6 +9,8 @@ define( function ( require ) {
 
                 _session    : null,
 
+                _userId     : null,
+
                 _resource   : $resource( config.api_url + 'sessions/:id' ),
 
                 isLoggedIn  : function() {
@@ -23,6 +25,10 @@ define( function ( require ) {
                     return this._session;
                 },
 
+                getUserId   : function () {
+                    return this._userId;
+                },
+
                 login       : function ( credentials ) {
                     var self    = this;
 
@@ -32,11 +38,13 @@ define( function ( require ) {
 
                             var session = {
                                 session : data.session,
-                                access  : data.type
+                                access  : data.type,
+                                user_id : data.user_id
                             };
                             
                             $cookies.session        = self._session = data.session;
                             $cookies.access         = self._access = data.type;
+                            $cookies.user_id        = self._userId = data.user_id;
                             self._loggedIn          = true;
                             $rootScope.$broadcast( 'LOGIN_SUCCESS', session );
                         },
@@ -49,6 +57,7 @@ define( function ( require ) {
                 setSession  : function ( sess ) {
                     this._session   = $cookies.session;
                     this._access    = $cookies.access;
+                    this._userId    = $cookies.user_id;
                     this._loggedIn  = true;
                 },
 
@@ -60,10 +69,12 @@ define( function ( require ) {
                     }, null, function() {
                         self._session       = undefined;
                         self._access        = undefined;
+                        self._userId        = undefined;
                         self._loggedIn      = false;
 
                         delete $cookies.session;
                         delete $cookies.access;
+                        delete $cookies.user_id;
 
                         $rootScope.$broadcast( 'LOGOUT_SUCCESS' );
                     });
