@@ -14,9 +14,22 @@ define( function ( require ) {
                         templateUrl     : 'partials/chat/list.html',
                         controller      : 'ChatListCtrl'
                     },
-                    'contentBody'       : {
-                        template        : '',
+                    'contentHeader'     : {
                         controller      : 'ChatBaseCtrl'
+                    }
+                }
+            })
+            .state( 'chat.details', {
+                access  : {
+                    loginRequired       : true,
+                    requiredPermissions : [ 'Super', 'Admin', 'Registered' ]
+                },
+                parent  : 'chat',
+                url     : 'chat/:id',
+                views   : {
+                    'contentBody@'      : {
+                        templateUrl     : 'partials/chat/details.html',
+                        controller      : 'ChatDetailsCtrl'
                     }
                 }
             });

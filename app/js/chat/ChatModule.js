@@ -2,6 +2,7 @@ define( function ( require ) {
     'use strict'
 
     var ChatController  = require( 'chat/ChatController' );
+    var ChatDetails     = require( 'chat/ChatDetails' );
     var ChatList        = require( 'chat/ChatList' );
     var ChatRouter      = require( 'chat/ChatRouter' );
     var ChatService     = require( 'chat/ChatService' );
@@ -11,6 +12,8 @@ define( function ( require ) {
     ChatModule.factory( 'ChatService', [ '$rootScope', '$resource', 'config', ChatService ] );
 
     ChatModule.controller( 'ChatBaseCtrl', [ '$rootScope', '$scope', 'UserService', 'SessionService', ChatController ]);
+
+    ChatModule.controller( 'ChatDetailsCtrl', [ '$scope', '$stateParams', 'ChatService', 'SessionService', ChatDetails ] );
 
     ChatModule.controller( 'ChatListCtrl', [ '$scope', 'ChatService', 'SessionService', ChatList ] );
 

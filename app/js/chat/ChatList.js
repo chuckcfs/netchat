@@ -15,7 +15,8 @@ define( function ( require ) {
                     }
                 ]
             },
-            limit   : 9999
+            limit   : 9999,
+            select  : 'from to last_message'
         });
 
         $scope.$on( 'CHATS_RETRIEVED', function ( e, data ) {

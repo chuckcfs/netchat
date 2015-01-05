@@ -5,7 +5,7 @@ define( function ( require ) {
         var Chat    = {
             _total  : 0,
 
-            _resource   : $resource( config.api_url + 'chats', null, {
+            _resource   : $resource( config.api_url + 'chats/:id', null, {
                 query   : {
                     method              : 'GET',
                     isArray             : true,
@@ -18,6 +18,16 @@ define( function ( require ) {
                     }
                 }
             }),
+
+            get         : function ( id ) {
+                return this._resource.get({
+                    id  : id
+                }, function ( data ) {
+                    while( !data.$resolved );
+
+                    $rootScope.$broadcast( 'CHAT_RETRIEVED', data );
+                });
+            },
 
             query       : function ( search ) {
                 return this._resource.query({

@@ -5,10 +5,12 @@
     </div>
     <ul class="users">
         <li ng-repeat="chat in chats">
-            <span class="user-avatar"></span>
-            <span ng-if="chat.from._id != user_id">{{ chat.from.name }}</span>
-            <span ng-if="chat.to._id != user_id">{{ chat.to.name }}</span>
-            <span class="chat-date pull-right">{{ chat.last_message | date:'MM/dd/yyyy' }}</span>
+            <a ui-sref="chat.details({ id : chat._id })">
+                <span class="user-avatar"></span>
+                <span ng-if="chat.from._id != user_id">{{ chat.from.name }}</span>
+                <span ng-if="chat.to._id != user_id">{{ chat.to.name }}</span>
+                <span class="chat-date pull-right">{{ chat.last_message | date:'MM/dd/yyyy' }}</span>
+            </a>
         </li>
     </ul>
 </div>

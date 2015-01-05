@@ -1,0 +1,6 @@
+<h5>To <span ng-if="chat.from._id == user_id">{{ chat.to.name }}</span><span ng-if="chat.to._id == user_id">{{ chat.from.name }}</span></h5>
+<div class="message-container">
+    <span class="icon icon-plus"></span>
+    <textarea name="message" class="form-control" rows="1" placeholder="Type something..."></textarea>
+    <button class="btn btn-default btn-small">Send</button>
+</div>
