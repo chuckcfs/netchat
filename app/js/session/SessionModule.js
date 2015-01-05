@@ -1,6 +1,7 @@
 define( function ( require ) {
     'use strict'
 
+    var EndController       = require( 'session/EndController' );
     var SessionRouter       = require( 'session/SessionRouter' );
     var SessionService      = require( 'session/SessionService' );
     var StartController     = require( 'session/StartController' );
@@ -10,6 +11,8 @@ define( function ( require ) {
     SessionModule.factory( 'SessionService', [ '$rootScope', '$cookies', '$resource', 'config', SessionService ]);
 
     SessionModule.controller( 'SessionStartCtrl', [ '$scope', '$location', 'SessionService', StartController ] );
+
+    SessionModule.controller( 'SessionEndCtrl', [ '$scope', '$location', 'SessionService', EndController ] );
 
     SessionModule.config([ '$stateProvider', SessionRouter ]);
 });

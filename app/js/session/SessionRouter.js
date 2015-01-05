@@ -11,6 +11,18 @@ define( function () {
                         controller      : 'SessionStartCtrl'
                     }
                 }
+            })
+            .state( 'logout', {
+                access  : {
+                    loginRequired       : true
+                },
+                url     : '/logout',
+                views   : {
+                    'contentBody'       : {
+                        template        : '',
+                        controller      : 'SessionEndCtrl'
+                    }
+                }
             });
     };
 });
