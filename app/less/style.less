@@ -20,7 +20,12 @@ body                                    { height: 100%; background-color: #eee; 
 /**********************
     SIDEBAR STYLES
 ***********************/
-#app-sidebar                            { height: 100%; padding-top: 20px; background-color: #fff; border-right: 1px solid #ddd; }
-.user-search                            { position: relative; }
-.user-search .icon-search               { color: #bbb; position: absolute; left: 7px; top: 7px; }
+#app-sidebar                            { height: 100%; padding: 20px 0 0 0; background-color: #fff; border-right: 1px solid #ddd; }
+.user-search                            { position: relative; padding: 0 10px; }
+.user-search .icon-search               { color: #bbb; position: absolute; left: 17px; top: 7px; }
 .user-search .form-control              { padding-left: 30px; }
+.users-list .users                      { margin-top: 20px; padding-left: 0; list-style: none; border-top: 1px solid #ddd; }
+.users-list .users li                   { height: 60px; font-size: 11px; padding: 0 10px 0 50px; line-height: 60px; position: relative; border-bottom: 1px solid #ddd; overflow: hidden; }
+.users-list .users li:hover             { background-color: #fbfbfb; cursor: pointer; }
+.users-list .user-avatar                { display: block; width: 30px; height: 30px; background-image: url(../img/user_avatar.png); background-size: contain; position: absolute; left: 10px; top: 15px; }
+.users-list .chat-date                  { font-size: 10px; font-weight: bold; color: #999; }

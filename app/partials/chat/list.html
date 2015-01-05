@@ -1,6 +1,14 @@
 <div class="users-list">
     <div class="user-search">
         <span class="icon-search"></span>
-        <input type="text" class="form-control" placeholder="Search..." />
+        <input type="text" class="form-control" placeholder="Search..." ng-change="search()" ng-model="chat" />
     </div>
+    <ul class="users">
+        <li ng-repeat="chat in chats">
+            <span class="user-avatar"></span>
+            <span ng-if="chat.from._id != user_id">{{ chat.from.name }}</span>
+            <span ng-if="chat.to._id != user_id">{{ chat.to.name }}</span>
+            <span class="chat-date pull-right">{{ chat.last_message | date:'MM/dd/yyyy' }}</span>
+        </li>
+    </ul>
 </div>
