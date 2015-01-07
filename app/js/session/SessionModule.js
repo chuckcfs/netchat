@@ -1,6 +1,7 @@
 define( function ( require ) {
     'use strict'
 
+    var angular             = require( 'angular' );
     var EndController       = require( 'session/EndController' );
     var SessionRouter       = require( 'session/SessionRouter' );
     var SessionService      = require( 'session/SessionService' );

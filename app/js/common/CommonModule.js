@@ -1,6 +1,7 @@
 define( function ( require ) {
     'use strict'
 
+    var angular         = require( 'angular' );
     var AuthService     = require( 'common/AuthService' );
     var SignService     = require( 'common/SignService' );
     var UserAccess      = require( 'common/UserAccess' );
