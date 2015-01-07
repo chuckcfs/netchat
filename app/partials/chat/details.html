@@ -1,5 +1,13 @@
-<h5>To <span ng-if="chat.from._id == user_id">{{ chat.to.name }}</span><span ng-if="chat.to._id == user_id">{{ chat.from.name }}</span></h5>
-<div class="message-container">
+<div class="messages-list">
+    <h5>To <span ng-if="chat.from._id == user_id">{{ chat.to.name }}</span><span ng-if="chat.to._id == user_id">{{ chat.from.name }}</span></h5>
+    <div class="message-container" ng-repeat="message in messages">
+        <div class="message" ng-class="{ 'sent' : user_id == message.from._id }">
+            <span class="user-avatar"></span>
+            <div class="content">{{ message.content }}</div>
+        </div>
+    </div>
+</div>
+<div class="message-editor">
     <span class="icon icon-plus"></span>
     <textarea name="message" class="form-control" rows="1" placeholder="Type something..."></textarea>
     <button class="btn btn-default btn-small">Send</button>

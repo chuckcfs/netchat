@@ -11,6 +11,7 @@ define( function ( require ) {
     require( 'router' );
     require( 'chat/ChatModule' );
     require( 'common/CommonModule' );
+    require( 'message/MessageModule' );
     require( 'session/SessionModule' );
     require( 'user/UserModule' );
 
@@ -21,6 +22,7 @@ define( function ( require ) {
         'ui.router',
         'ChatModule',
         'CommonModule',
+        'MessageModule',
         'SessionModule',
         'UserModule'
     ]);
