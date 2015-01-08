@@ -19,6 +19,14 @@ define( function ( require ) {
                 }
             }),
 
+            create      : function ( message ) {
+                return this._resource.save( message, function ( data ) {
+                    while ( !data.$resolved );
+
+                    $rootScope.$broadcast( 'MESSAGE_CREATED', data );
+                });
+            },
+
             query       : function ( search ) {
                 return this._resource.query({
                     filters : search.filters,
