@@ -16,10 +16,14 @@ a, a:hover, a:active, a:focus           { outline: 0; text-decoration: none; }
 /**********************
     FORM STYLES
 ***********************/
-.form-signin                            { margin: 0 auto; padding: 15px; max-width: 330px; }
-.form-signin .form-control              { height: auto; font-size: 16px; padding: 10px; }
+.form-signin, .form-register            { margin: 0 auto; padding: 15px; max-width: 330px; }
+.form-signin .form-control,
+.form-register .form-control            { height: auto; font-size: 16px; padding: 10px; }
+.form-register #name,
 .form-signin input[type="email"]        { border-radius: 4px 4px 0 0; border-bottom: none; }
+.form-register #pass,
 .form-signin input[type="password"]     { border-radius: 0 0 4px 4px; margin-bottom: 15px; }
+.form-register #email                   { border-radius: 0; border-bottom: 0; }
 
 /**********************
     SIDEBAR STYLES
