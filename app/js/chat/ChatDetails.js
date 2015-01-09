@@ -44,5 +44,11 @@ define( function ( require ) {
             $scope.newMessage   = '';
             $scope.messages.push( data );
         });
+
+        $scope.$on( 'message:received', function ( e, message ) {
+            if ( message.chat_id == $stateParams.id ) {
+                $scope.messages.push( message );
+            }
+        });
     };
 });

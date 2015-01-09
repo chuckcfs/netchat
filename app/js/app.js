@@ -9,6 +9,7 @@ define( function ( require ) {
     require( 'jQuery' );
     require( 'resource' );
     require( 'router' );
+    require( 'socketio' );
     require( 'chat/ChatModule' );
     require( 'common/CommonModule' );
     require( 'message/MessageModule' );
@@ -20,6 +21,7 @@ define( function ( require ) {
         'ngCookies',
         'ngResource',
         'ui.router',
+        'socket.io',
         'ChatModule',
         'CommonModule',
         'MessageModule',
@@ -27,7 +29,7 @@ define( function ( require ) {
         'UserModule'
     ]);
 
-    app.run( [ '$rootScope', '$state', '$location', '$cookies', 'AuthService', 'SessionService', function ( $rootScope, $state, $location, $cookies, Auth, Session ) {
+    app.run( [ '$rootScope', '$state', '$location', '$cookies', 'socket', 'config', 'AuthService', 'SessionService', function ( $rootScope, $state, $location, $cookies, socket, config, Auth, Session ) {
         $rootScope.$state   = $state;
 
         // Check the user session
@@ -48,6 +50,21 @@ define( function ( require ) {
             }
         }
 
+        // Set the connection to the backend socket to receive nofications of new messages
+        if ( Session.isLoggedIn() && !socket.isConnected() ) {
+            socket.connect( config.api_url );
+
+            socket.on( 'connect', function () {
+                socket.emit( 'join', {
+                    user    : Session.getUserId()
+                });
+            });
+
+            socket.on( 'message:new', function ( message ) {
+                $rootScope.$broadcast( 'message:received', message );
+            });
+        }
+
         $rootScope.$on( '$stateChangeStart', function ( event, next ) {
             var authorized  = false,
                 access      = next.access;
@@ -61,7 +78,7 @@ define( function ( require ) {
         });
     }]);
 
-    app.config([ '$httpProvider', function ( $httpProvider ) {
+    app.config([ '$httpProvider', 'socketProvider', 'config', function ( $httpProvider, socketProvider, config ) {
         $httpProvider.interceptors.push( [ '$q', '$rootScope', '$cookies', 'SignService', function ( $q, $rootScope, $cookies, SignService ) {
             return {
                 request     : function( config ) {
@@ -108,6 +125,8 @@ define( function ( require ) {
                 }
             };
         }]);
+
+        socketProvider.setUrl( config.api_url );
     }]);
 
     return app;

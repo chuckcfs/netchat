@@ -11,9 +11,9 @@ define( function ( require ) {
 
     SessionModule.factory( 'SessionService', [ '$rootScope', '$cookies', '$resource', 'config', SessionService ]);
 
-    SessionModule.controller( 'SessionStartCtrl', [ '$scope', '$location', 'SessionService', StartController ] );
+    SessionModule.controller( 'SessionStartCtrl', [ '$scope', '$location', 'socket', 'SessionService', StartController ] );
 
-    SessionModule.controller( 'SessionEndCtrl', [ '$scope', '$location', 'SessionService', EndController ] );
+    SessionModule.controller( 'SessionEndCtrl', [ '$scope', '$location', 'socket', 'SessionService', EndController ] );
 
     SessionModule.config([ '$stateProvider', SessionRouter ]);
 });

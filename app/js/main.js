@@ -7,7 +7,8 @@ require.config({
         'load-image'        : '../bower_components/blueimp-load-image/js/load-image',
         'jQuery'            : '../bower_components/jquery/dist/jquery.min',
         'resource'          : '../bower_components/angular-resource/angular-resource.min',
-        'router'            : '../bower_components/angular-ui-router/release/angular-ui-router.min'
+        'router'            : '../bower_components/angular-ui-router/release/angular-ui-router.min',
+        'socketio'          : 'lib/socket.io'
     },
 
     shim    : {
