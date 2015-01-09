@@ -54,5 +54,9 @@ define( function ( require ) {
                 $scope.messages.push( message );
             }
         });
+        $scope.$on( 'render:finished', function () {
+            var element         = document.getElementById( 'messages-list' );
+            element.scrollTop   = element.scrollHeight;
+        });
     };
 });

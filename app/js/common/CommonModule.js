@@ -3,6 +3,7 @@ define( function ( require ) {
 
     var angular         = require( 'angular' );
     var AuthService     = require( 'common/AuthService' );
+    var FinishRender    = require( 'common/FinishRender' );
     var SignService     = require( 'common/SignService' );
     var UserAccess      = require( 'common/UserAccess' );
 
@@ -13,4 +14,6 @@ define( function ( require ) {
     CommonModule.factory( 'AuthService', [ 'SessionService', AuthService ] );
 
     CommonModule.directive( 'userAccess', [ 'AuthService', UserAccess ] );
+
+    CommonModule.directive( 'finishRender', [ '$timeout', FinishRender ] );
 });
