@@ -3,6 +3,7 @@ define( function ( require ) {
 
     return function ( $scope, $stateParams, Chat, Message, Session ) {
         $scope.user_id  = Session.getUserId();
+        $scope.messages = Array();
 
         Chat.get( $stateParams.id );
         Message.query({
@@ -10,6 +11,7 @@ define( function ( require ) {
                 chat_id : $stateParams.id
             },
             limit   : 20,
+            order   : 'DESC',
             page    : 1
         });
 
@@ -38,7 +40,9 @@ define( function ( require ) {
             $scope.chat = data;
         });
         $scope.$on( 'MESSAGES_RETRIEVED', function ( e, data ) {
-            $scope.messages = data;
+            for ( var i = 0; i < data.length; i++ ) {
+                $scope.messages.unshift( data[i] );
+            }
         });
         $scope.$on( 'MESSAGE_CREATED', function ( e, data ) {
             $scope.newMessage   = '';

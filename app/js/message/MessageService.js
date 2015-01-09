@@ -31,7 +31,7 @@ define( function ( require ) {
                 return this._resource.query({
                     filters : search.filters,
                     limit   : ( search.limit ) ? search.limit : 10,
-                    order   : ( search.order ) ? search.orders : 'ASC',
+                    order   : ( search.order ) ? search.order : 'ASC',
                     page    : ( search.page ) ? search.page : 1,
                     select  : search.select,
                     sort    : ( search.sort ) ? search.sort : 'creation_date'
