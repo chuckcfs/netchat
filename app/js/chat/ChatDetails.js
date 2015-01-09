@@ -2,18 +2,30 @@ define( function ( require ) {
     'use strict'
 
     return function ( $scope, $stateParams, Chat, Message, Session ) {
+        var list        = $( '#messages-list' ),
+            query       = {
+                filters : {
+                    chat_id : $stateParams.id
+                },
+                limit   : 10,
+                order   : 'DESC',
+                page    : 1
+            };
+
+        list.scroll( function () {
+            if ( list.scrollTop() == 0 ) {
+                if ( Message.getTotal() > $scope.messages.length ) {
+                    query.page++;
+                    Message.query( query );
+                }
+            }
+        });
+
         $scope.user_id  = Session.getUserId();
         $scope.messages = Array();
 
         Chat.get( $stateParams.id );
-        Message.query({
-            filters : {
-                chat_id : $stateParams.id
-            },
-            limit   : 20,
-            order   : 'DESC',
-            page    : 1
-        });
+        Message.query( query );
 
         $scope.send     = function () {
             var from    = {
@@ -55,8 +67,7 @@ define( function ( require ) {
             }
         });
         $scope.$on( 'render:finished', function () {
-            var element         = document.getElementById( 'messages-list' );
-            element.scrollTop   = element.scrollHeight;
+            list.scrollTop( list[0].scrollHeight );
         });
     };
 });

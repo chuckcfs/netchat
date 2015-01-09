@@ -27,6 +27,10 @@ define( function ( require ) {
                 });
             },
 
+            getTotal    : function () {
+                return this._total;
+            },
+
             query       : function ( search ) {
                 return this._resource.query({
                     filters : search.filters,
