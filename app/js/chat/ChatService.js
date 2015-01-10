@@ -19,6 +19,14 @@ define( function ( require ) {
                 }
             }),
 
+            create      : function ( chat ) {
+                return this._resource.save( chat, function ( data ) {
+                    while ( !data.$resolved );
+
+                    $rootScope.$broadcast( 'CHAT_CREATED', data );
+                });
+            },
+
             get         : function ( id ) {
                 return this._resource.get({
                     id  : id

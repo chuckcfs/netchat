@@ -1,11 +1,11 @@
 <div class="users-list">
     <div class="user-search">
         <span class="icon-search"></span>
-        <input type="text" class="form-control" placeholder="Search..." ng-change="search()" ng-blur="hide()" ng-model="keyword" />
+        <input type="text" class="form-control" placeholder="Search..." ng-change="search()" ng-model="keyword" />
         <div id="retrieved-users">
             <i class="close icon-cancel" ng-click="hide()"></i>
             <ul class="users">
-                <li ng-repeat="user in users">
+                <li ng-repeat="user in users" ng-click="select($index)">
                     <span class="user-avatar"></span>
                     <span>{{ user.name }}</span>
                 </li>
