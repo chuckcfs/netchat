@@ -14,7 +14,7 @@
     </div>
     <ul class="users">
         <li ng-repeat="chat in chats">
-            <a ui-sref="chat.details({ id : chat._id })">
+            <a ui-sref="chat.details({ id : chat._id })" ui-sref-active="active">
                 <span class="user-avatar"></span>
                 <span ng-if="chat.from._id != user_id">{{ chat.from.name }}</span>
                 <span ng-if="chat.to._id != user_id">{{ chat.to.name }}</span>
