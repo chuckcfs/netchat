@@ -30,9 +30,12 @@ a, a:hover, a:active, a:focus           { outline: 0; text-decoration: none; }
 ***********************/
 #app-sidebar                            { height: 100%; padding: 20px 0 0 0; background-color: #fff; border-right: 1px solid #ddd; overflow-y: scroll; }
 .user-search                            { position: relative; padding: 0 10px; }
+.user-search #retrieved-users           { width: 94%; height: 300px; display: none; background-color: #fff; position: absolute; top: 40px; left: 10px; border: 1px solid #ddd; z-index: 10; overflow-y: auto; }
+.user-search #retrieved-users .close    { position: absolute; right: 0; margin: 5px 0; }
+.user-search #retrieved-users .users    { margin-top: 33px; }
 .user-search .icon-search               { color: #bbb; position: absolute; left: 17px; top: 7px; }
 .user-search .form-control              { padding-left: 30px; }
-.users-list .users                      { margin-top: 20px; padding-left: 0; list-style: none; border-top: 1px solid #ddd; }
+.users-list .users                      { margin-top: 20px; padding-left: 0; list-style: none; border-top: 1px solid #ddd; position: relative; z-index: 1; }
 .users-list .users li                   { height: 60px; font-size: 11px; padding: 0 10px 0 50px; line-height: 60px; position: relative; border-bottom: 1px solid #ddd; overflow: hidden; }
 .users-list .users li a                 { display: block; color: #333; }
 .users-list .users li:hover             { background-color: #fbfbfb; cursor: pointer; }

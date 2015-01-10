@@ -1,7 +1,16 @@
 <div class="users-list">
     <div class="user-search">
         <span class="icon-search"></span>
-        <input type="text" class="form-control" placeholder="Search..." ng-change="search()" ng-model="chat" />
+        <input type="text" class="form-control" placeholder="Search..." ng-change="search()" ng-blur="hide()" ng-model="keyword" />
+        <div id="retrieved-users">
+            <i class="close icon-cancel" ng-click="hide()"></i>
+            <ul class="users">
+                <li ng-repeat="user in users">
+                    <span class="user-avatar"></span>
+                    <span>{{ user.name }}</span>
+                </li>
+            </ul>
+        </div>
     </div>
     <ul class="users">
         <li ng-repeat="chat in chats">
