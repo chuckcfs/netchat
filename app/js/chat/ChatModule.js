@@ -3,6 +3,7 @@ define( function ( require ) {
 
     var angular         = require( 'angular' );
     var ChatController  = require( 'chat/ChatController' );
+    var ChatDateFilter  = require( 'chat/ChatDateFilter' );
     var ChatDetails     = require( 'chat/ChatDetails' );
     var ChatList        = require( 'chat/ChatList' );
     var ChatRouter      = require( 'chat/ChatRouter' );
@@ -17,6 +18,8 @@ define( function ( require ) {
     ChatModule.controller( 'ChatDetailsCtrl', [ '$scope', '$stateParams', 'config', 'ChatService', 'MessageService', 'SessionService', 'SignService', ChatDetails ] );
 
     ChatModule.controller( 'ChatListCtrl', [ '$scope', '$state', 'ChatService', 'SessionService', 'UserService', ChatList ] );
+
+    ChatModule.filter( 'chatDate', [ ChatDateFilter ] );
 
     ChatModule.config([ '$stateProvider', ChatRouter ]);
 });

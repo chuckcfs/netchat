@@ -77,13 +77,14 @@ define( function ( require ) {
                 ]
             },
             limit   : 9999,
-            select  : 'from to last_message'
+            select  : 'from to last_message',
+            sort    : 'last_message'
         });
 
         $scope.$on( 'CHATS_RETRIEVED', function ( e, data ) {
             if ( !searching ) {
                 for ( var i = 0; i < data.length; i++ ) {
-                    $scope.chats.push( data[i] );
+                    $scope.chats.unshift( data[i] );
                 }
             } else {
                 if ( data.length == 1 ) {
