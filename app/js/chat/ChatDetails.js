@@ -1,15 +1,20 @@
 define( function ( require ) {
     'use strict'
 
-    return function ( $scope, $stateParams, Chat, Message, Session ) {
-        var list        = $( '#messages-list' ),
-            query       = {
+    return function ( $scope, $stateParams, config, Chat, Message, Session, Sign ) {
+        var list            = $( '#messages-list' ),
+            query           = {
                 filters : {
                     chat_id : $stateParams.id
                 },
                 limit   : 10,
                 order   : 'DESC',
                 page    : 1
+            },
+            close           = null,
+            attachUploaded  = function ( e, data ) {
+                $scope.attachment   = data.result.file;
+                close       = data.close;
             };
 
         list.scroll( function () {
@@ -21,13 +26,24 @@ define( function ( require ) {
             }
         });
 
-        $scope.user_id  = Session.getUserId();
-        $scope.messages = Array();
+        $scope.attachment   = null;
+        $scope.config       = {
+            done                : attachUploaded,
+            fileName            : 'file',
+            fileTypes           : /(\.|\/)(jpg|png|jpeg)$/i,
+            requestSign         : Sign.sign,
+            session             : Session.getSession(),
+            sequentialUploads   : true,
+            url                 : config.api_url + 'messages/file' ,
+            validateType        : true
+        };
+        $scope.user_id      = Session.getUserId();
+        $scope.messages     = Array();
 
         Chat.get( $stateParams.id );
         Message.query( query );
 
-        $scope.send     = function () {
+        $scope.send         = function () {
             var from    = {
                     _id     : $scope.user_id,
                     name    : $scope.user
@@ -41,10 +57,11 @@ define( function ( require ) {
                 };
 
             Message.create({
-                chat    : $stateParams.id,
-                content : $scope.newMessage,
-                from    : from,
-                to      : to
+                attachment  : $scope.attachment,
+                chat        : $stateParams.id,
+                content     : $scope.newMessage,
+                from        : from,
+                to          : to
             });
         };
 
@@ -59,6 +76,7 @@ define( function ( require ) {
         $scope.$on( 'MESSAGE_CREATED', function ( e, data ) {
             $scope.newMessage   = '';
             $scope.messages.push( data );
+            close();
         });
 
         $scope.$on( 'message:received', function ( e, message ) {

@@ -6,6 +6,7 @@ require.config({
         'fileupload'        : '../bower_components/blueimp-file-upload/js/jquery.fileupload',
         'load-image'        : '../bower_components/blueimp-load-image/js/load-image',
         'jQuery'            : '../bower_components/jquery/dist/jquery.min',
+        'jquery.ui.widget'  : '../bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget',
         'resource'          : '../bower_components/angular-resource/angular-resource.min',
         'router'            : '../bower_components/angular-ui-router/release/angular-ui-router.min',
         'socketio'          : 'lib/socket.io'
@@ -27,7 +28,7 @@ require.config({
         'fileupload'        : [
             'angular',
             'jQuery',
-            '../bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget',
+            'jquery.ui.widget',
             '../bower_components/blueimp-file-upload/js/jquery.iframe-transport'
         ],
         'resource'          : [

@@ -12,6 +12,7 @@ body                                    { height: 100%; padding-top: 50px; }
 .navbar                                 { margin-bottom: 0; }
 a, a:hover, a:active, a:focus           { outline: 0; text-decoration: none; }
 .user-avatar                            { display: block; width: 30px; height: 30px; background-image: url(../img/user_avatar.png); background-size: contain; }
+img                                     { max-width: 100%; }
 
 /**********************
     FORM STYLES
@@ -47,6 +48,16 @@ a, a:hover, a:active, a:focus           { outline: 0; text-decoration: none; }
 .users-list .chat-date                  { font-size: 10px; font-weight: bold; color: #999; }
 
 /**********************
+    UPLOADER STYLES
+***********************/
+#file-uploader                          { display: none; width: 400px; height: 120px; background-color: #fff; border: 1px solid #ddd; position: absolute; right: 20px; bottom: 55px; border-radius: 5px; }
+#file-uploader .close                   { position: absolute; top: 10px; right: 0; }
+#file-uploader #image-upload            { width: 100px; float: left; margin-top: 10px; margin-left: 10px; text-align: center; }
+#file-uploader #progress-bar            { width: 270px; float: left; margin-top: 50px; margin-left: 10px; }
+.arrow-tip                              { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid #fff; position: absolute; right: 40px; bottom: -10px; z-index: 10; }
+.arrow-outline                          { width: 0; height: 0; border-left: 11px solid transparent; border-right: 11px solid transparent; border-top: 11px solid #ddd; position: absolute; right: 39px; bottom: -12px; z-index: 1; }
+
+/**********************
     MAIN STYLES
 ***********************/
 #main-container                         { padding: 0; }
@@ -60,7 +71,9 @@ a, a:hover, a:active, a:focus           { outline: 0; text-decoration: none; }
 .message.sent .user-avatar              { float: right; }
 .message.sent .content                  { margin-left: 0; margin-right: 20px; float: right; text-align: right; background-color: #e7f1fe; background-image: -moz-linear-gradient( top, #e7f1fe, #c7defe ); background-image: -webkit-gradient( linear, left top, left bottom, #e7f1fe, #c7defe ); background-image: -webkit-linear-gradient( top, #e7f1fe,#c7defe ); }
 .message-editor                         { width: 100%; background-color: #f0f0f0; padding: 15px 10px 15px 20px; position: absolute; bottom: 0; border-top: 1px solid #ddd; }
-.message-editor input[type="text"]      { font-size: 12px; color: #aaa; padding-left: 35px; padding-right: 55px; resize: none; }
+.message-editor input[type="text"]      { font-size: 12px; color: #aaa; padding-left: 35px; padding-right: 80px; resize: none; }
 .message-editor .btn                    { background-color: transparent; font-size: 13px; font-weight: bold; line-height: 18px; color: #a4cdee; position: absolute; right: 11px; top: 17px; border: 0; border-radius: 0 4px 4px 0; }
 .message-editor .btn:hover              { color: #1878c3; }
 .message-editor .icon                   { color: #ccc; font-size: 18px; position: absolute; left: 25px; top: 19px; }
+.message-editor .icon-attach            { cursor: pointer; left: auto; right: 60px; }
+.icon-attach:hover                      { color: #aaa; }

@@ -14,7 +14,7 @@ define( function ( require ) {
 
     ChatModule.controller( 'ChatBaseCtrl', [ '$rootScope', '$scope', 'UserService', 'SessionService', ChatController ]);
 
-    ChatModule.controller( 'ChatDetailsCtrl', [ '$scope', '$stateParams', 'ChatService', 'MessageService', 'SessionService', ChatDetails ] );
+    ChatModule.controller( 'ChatDetailsCtrl', [ '$scope', '$stateParams', 'config', 'ChatService', 'MessageService', 'SessionService', 'SignService', ChatDetails ] );
 
     ChatModule.controller( 'ChatListCtrl', [ '$scope', '$state', 'ChatService', 'SessionService', 'UserService', ChatList ] );
 

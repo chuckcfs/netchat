@@ -8,7 +8,8 @@
     </div>
 </div>
 <form class="message-editor" ng-submit="send()">
-    <span class="icon icon-plus"></span>
+    <file-uploader data-config="config"></file-uploader>
+    <i class="icon icon-plus"></i>
     <input type="text" name="message" class="form-control" placeholder="Type something..." ng-model="newMessage" />
     <input type="submit" class="btn btn-default btn-small" value="Send" />
 </form>
