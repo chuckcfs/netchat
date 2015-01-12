@@ -37,6 +37,7 @@ define( function ( require ) {
             url                 : config.api_url + 'messages/file' ,
             validateType        : true
         };
+        $scope.file_url     = config.static_url;
         $scope.user_id      = Session.getUserId();
         $scope.messages     = Array();
 

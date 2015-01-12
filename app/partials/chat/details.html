@@ -3,7 +3,10 @@
     <div class="message-container" ng-repeat="message in messages" finish-render>
         <div class="message" ng-class="{ 'sent' : user_id == message.from._id }">
             <span class="user-avatar"></span>
-            <div class="content">{{ message.content }}</div>
+            <div class="content">
+                <p ng-class="{only : message.attachment == null }">{{ message.content }}</p>
+                <img ng-show="message.attachment.path" ng-src="{{ file_url + message.attachment.path }}" />
+            </div>
         </div>
     </div>
 </div>
