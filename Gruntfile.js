@@ -27,7 +27,8 @@ module.exports = function( grunt ) {
                         api_url     : 'http://localhost:3000/',
                         consumer    : '54a9ab83120cafcd74bb0da5',
                         secret      : 'J5e2fprVoXJpN1ycPiDP5Xz3howQKZer',
-                        static_url  : 'http://localhost:3000/'
+                        static_url  : 'http://localhost:3000/',
+                        s3_uploads  : true
                     }
                 }
             },
@@ -40,7 +41,8 @@ module.exports = function( grunt ) {
                         api_url     : 'http://api-netchat.bitslice.net/',
                         consumer    : '54a9ab83120cafcd74bb0da5',
                         secret      : 'J5e2fprVoXJpN1ycPiDP5Xz3howQKZer',
-                        static_url  : 'http://api-netchat.bitslice.net/'
+                        static_url  : 'http://api-netchat.bitslice.net/',
+                        s3_uploads  : true
                     }
                 }
             }

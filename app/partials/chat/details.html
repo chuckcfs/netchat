@@ -5,7 +5,12 @@
             <span class="user-avatar"></span>
             <div class="content">
                 <p ng-class="{only : message.attachment == null }">{{ message.content }}</p>
-                <img ng-show="message.attachment.path" ng-src="{{ file_url + message.attachment.path }}" />
+                <div class="message-attachment" ng-if="s3_uploads">
+                    <img ng-show="message.attachment.path" ng-src="{{ message.attachment.path }}" />
+                </div>
+                <div class="message-attachment" ng-if="!s3_uploads">
+                    <img ng-show="message.attachment.path" ng-src="{{ file_url + message.attachment.path }}" />
+                </div>
             </div>
         </div>
     </div>

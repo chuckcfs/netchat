@@ -40,6 +40,7 @@ define( function ( require ) {
         $scope.file_url     = config.static_url;
         $scope.user_id      = Session.getUserId();
         $scope.messages     = Array();
+        $scope.s3_uploads   = config.s3_uploads;
 
         Chat.get( $stateParams.id );
         Message.query( query );
