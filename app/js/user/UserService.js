@@ -52,6 +52,16 @@ define( function ( require ) {
 
                     $rootScope.$broadcast( 'USERS_RETRIEVED', data );
                 });
+            },
+
+            remove      : function ( id ) {
+                return this._resource.remove({
+                    id  : id
+                }, function ( data ) {
+                    while ( !data.$resolved );
+
+                    $rootScope.$broadcast( 'USER_REMOVED', data );
+                });
             }
         };
 

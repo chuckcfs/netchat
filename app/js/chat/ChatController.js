@@ -7,6 +7,7 @@ define( function ( require ) {
         $scope.$on( 'USER_RETRIEVED', function ( e, user ) {
             $( '#user-menu' ).removeClass( 'hidden' );
             $rootScope.user     = user.name;
+            $rootScope.user_id  = user._id;
         });
     };
 });

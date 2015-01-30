@@ -11,6 +11,18 @@ define( function ( require ) {
                         controller      : 'UserRegisterCtrl'
                     }
                 }
+            })
+            .state( 'remove', {
+                access      : {
+                    loginRequired       : true
+                },
+                url         : '/remove/:id',
+                views   : {
+                    'contentBody'       : {
+                        template        : '',
+                        controller      : 'UserRemoveCtrl'
+                    }
+                }
             });
     }
 });
