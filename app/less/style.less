@@ -52,7 +52,8 @@ img                                     { max-width: 100%; }
 ***********************/
 #file-uploader                          { display: none; width: 400px; height: 120px; background-color: #fff; border: 1px solid #ddd; position: absolute; right: 20px; bottom: 55px; border-radius: 5px; }
 #file-uploader .close                   { position: absolute; top: 10px; right: 0; }
-#file-uploader #image-upload            { width: 100px; float: left; margin-top: 10px; margin-left: 10px; text-align: center; }
+#file-uploader #image-upload            { width: 100px; height: 100px; float: left; margin-top: 10px; margin-left: 10px; text-align: center; }
+#file-uploader #image-upload:before     { content: ""; display: inline-block; height: 100%; vertical-align: middle; }
 #file-uploader #progress-bar            { width: 270px; float: left; margin-top: 50px; margin-left: 10px; }
 .arrow-tip                              { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid #fff; position: absolute; right: 40px; bottom: -10px; z-index: 10; }
 .arrow-outline                          { width: 0; height: 0; border-left: 11px solid transparent; border-right: 11px solid transparent; border-top: 11px solid #ddd; position: absolute; right: 39px; bottom: -12px; z-index: 1; }
