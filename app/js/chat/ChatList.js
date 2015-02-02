@@ -58,7 +58,10 @@ define( function ( require ) {
         $scope.search   = function () {
             User.query({
                 filters : {
-                    name    : $scope.keyword
+                    name    : $scope.keyword,
+                    _id     : {
+                        '$ne'   : $scope.user_id
+                    }
                 },
                 limit   : 20,
                 select  : 'name'
