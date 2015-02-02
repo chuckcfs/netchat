@@ -1,7 +1,7 @@
 define( function ( require ) {
     'use strict'
 
-    return function ( $scope, $location, socket, Session ) {
+    return function ( $rootScope, $scope, $location, socket, Session ) {
         $( '#app-sidebar' ).addClass( 'hidden' ).removeClass( 'col-md-3' );
         $( '#main-container' ).removeClass( 'col-md-9' );
         $( '#user-menu' ).addClass( 'hidden' );
