@@ -9,7 +9,7 @@ define( function ( require ) {
 
     var UserModule          = angular.module( 'UserModule', []);
 
-    UserModule.factory( 'UserService', [ '$rootScope', '$resource', 'config', UserService ] );
+    UserModule.factory( 'UserService', [ 'BaseService', UserService ] );
 
     UserModule.controller( 'UserRegisterCtrl', [ '$scope', '$location', 'UserService', RegisterController ] );
 

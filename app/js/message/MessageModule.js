@@ -6,5 +6,5 @@ define( function ( require ) {
 
     var MessageModule   = angular.module( 'MessageModule', []);
 
-    MessageModule.factory( 'MessageService', [ '$rootScope', '$resource', 'config', MessageService ] );
+    MessageModule.factory( 'MessageService', [ 'BaseService', MessageService ] );
 });

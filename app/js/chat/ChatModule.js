@@ -11,7 +11,7 @@ define( function ( require ) {
 
     var ChatModule      = angular.module( 'ChatModule', []);
 
-    ChatModule.factory( 'ChatService', [ '$rootScope', '$resource', 'config', ChatService ] );
+    ChatModule.factory( 'ChatService', [ 'BaseService', ChatService ] );
 
     ChatModule.controller( 'ChatBaseCtrl', [ '$rootScope', '$scope', 'UserService', 'SessionService', ChatController ]);
 

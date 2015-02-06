@@ -3,6 +3,7 @@ define( function ( require ) {
 
     var angular         = require( 'angular' );
     var AuthService     = require( 'common/AuthService' );
+    var BaseService     = require( 'common/BaseService' );
     var FileUploader    = require( 'common/FileUploader' );
     var FinishRender    = require( 'common/FinishRender' );
     var SignService     = require( 'common/SignService' );
@@ -13,6 +14,8 @@ define( function ( require ) {
     CommonModule.factory( 'SignService', [ 'config', SignService ] );
 
     CommonModule.factory( 'AuthService', [ 'SessionService', AuthService ] );
+
+    CommonModule.factory( 'BaseService', [ '$rootScope', '$resource', 'config', BaseService ] );
 
     CommonModule.directive( 'userAccess', [ 'AuthService', UserAccess ] );
 
