@@ -78,7 +78,9 @@ define( function ( require ) {
         $scope.$on( 'MESSAGE_CREATED', function ( e, data ) {
             $scope.newMessage   = '';
             $scope.messages.push( data );
-            close();
+            if ( close ) {
+                close();
+            }
         });
 
         $scope.$on( 'message:received', function ( e, message ) {
