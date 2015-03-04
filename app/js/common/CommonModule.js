@@ -11,13 +11,11 @@ define( function ( require ) {
 
     var CommonModule    = angular.module( 'CommonModule', []);
 
-    CommonModule.factory( 'SignService', [ 'config', SignService ] );
+    CommonModule.factory( 'SignService', [ 'config', SignService ] );[]
 
     CommonModule.factory( 'AuthService', [ 'SessionService', AuthService ] );
 
     CommonModule.factory( 'BaseService', [ '$rootScope', '$resource', 'config', BaseService ] );
-
-    CommonModule.directive( 'userAccess', [ 'AuthService', UserAccess ] );
 
     CommonModule.directive( 'finishRender', [ '$timeout', FinishRender ] );
 
