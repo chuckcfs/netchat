@@ -29,7 +29,7 @@ define( function ( require ) {
         'UserModule'
     ]);
 
-    app.run( [ '$rootScope', '$state', '$location', '$cookies', 'socket', 'config', 'AuthService', 'SessionService', function ( $rootScope, $state, $location, $cookies, socket, config, Auth, Session ) {
+    app.run( [ '$rootScope', '$state', '$location', '$cookies', 'socket', 'config', 'SessionService', function ( $rootScope, $state, $location, $cookies, socket, config, Session ) {
         $rootScope.$state   = $state;
 
         // Check the user session
@@ -64,18 +64,6 @@ define( function ( require ) {
                 $rootScope.$broadcast( 'message:received', message );
             });
         }
-
-        $rootScope.$on( '$stateChangeStart', function ( event, next ) {
-            var authorized  = false,
-                access      = next.access;
-            if ( access !== undefined && access !== null ) {
-                authorized  = Auth.authorize( access.loginRequired, access.requiredPermissions );
-                
-                if ( !authorized ) {
-                    $location.path( '/login' );
-                }
-            }
-        });
     }]);
 
     app.config([ '$httpProvider', 'socketProvider', 'config', function ( $httpProvider, socketProvider, config ) {
