@@ -67,7 +67,7 @@ define( function ( require ) {
     }]);
 
     app.config([ '$httpProvider', 'socketProvider', 'config', function ( $httpProvider, socketProvider, config ) {
-        $httpProvider.interceptors.push( [ '$q', '$rootScope', '$cookies', 'SignService', function ( $q, $rootScope, $cookies, SignService ) {
+        $httpProvider.interceptors.push( [ '$rootScope', '$cookies', 'SignService', function ( $rootScope, $cookies, SignService ) {
             return {
                 request     : function( config ) {
                     var external    = ( config.url.indexOf( 'http' ) != -1 ) ? true : false;
