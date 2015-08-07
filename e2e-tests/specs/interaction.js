@@ -60,7 +60,7 @@ describe( 'NetChat Interactions', function () {
     });
 
     it ( 'should send a message with an attachment', function () {
-        var file    = path.resolve( __dirname, './files/test.jpg' );
+        var file    = path.resolve( process.cwd(), './e2e-tests/specs/files/test.jpg' );
 
         element( by.css( '.input-fileupload' ) ).sendKeys( file ).then( function () {
             browser.sleep( 2000 );
