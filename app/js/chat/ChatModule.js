@@ -1,7 +1,6 @@
 define( function ( require ) {
     'use strict'
 
-    var angular         = require( 'angular' );
     var ChatController  = require( 'chat/ChatController' );
     var ChatDateFilter  = require( 'chat/ChatDateFilter' );
     var ChatDetails     = require( 'chat/ChatDetails' );

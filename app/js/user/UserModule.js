@@ -1,7 +1,6 @@
 define( function ( require ) {
     'use strict'
 
-    var angular             = require( 'angular' );
     var RegisterController  = require( 'user/RegisterController' );
     var RemoveController    = require( 'user/RemoveController' );
     var UserRouter          = require( 'user/UserRouter' );

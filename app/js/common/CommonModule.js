@@ -1,7 +1,6 @@
 define( function ( require ) {
     'use strict'
 
-    var angular         = require( 'angular' );
     var BaseService     = require( 'common/BaseService' );
     var FileUploader    = require( 'common/FileUploader' );
     var FinishRender    = require( 'common/FinishRender' );

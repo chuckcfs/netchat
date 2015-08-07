@@ -1,6 +1,5 @@
 define( function ( require ) {
 
-    var angular     = require( 'angular' );
     var io          = require( 'https://cdn.socket.io/socket.io-1.2.1.js' );
 
     var SocketIO    = angular.module( 'socket.io', []);

@@ -1,10 +1,6 @@
 define( function ( require ) {
     'use strict'
 
-    var angular     = require( 'angular' );
-    var loadImage   = require( 'load-image' );
-    require( 'fileupload' );
-
     return function ( $compile, $http, $templateCache ) {
         return {
             restrict    : 'EA',
