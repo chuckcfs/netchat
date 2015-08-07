@@ -1,14 +1,7 @@
 define( function ( require ) {
     'use strict'
 
-    var angular     = require( 'angular' );
-
     require( 'config' );
-    require( 'cookies' );
-    require( 'bootstrap' );
-    require( 'jQuery' );
-    require( 'resource' );
-    require( 'router' );
     require( 'socketio' );
     require( 'chat/ChatModule' );
     require( 'common/CommonModule' );
@@ -27,7 +20,7 @@ define( function ( require ) {
         'MessageModule',
         'SessionModule',
         'UserModule'
-    ]);
+]);
 
     app.run( [ '$rootScope', '$state', '$location', '$cookies', 'socket', 'config', 'SessionService', function ( $rootScope, $state, $location, $cookies, socket, config, Session ) {
         $rootScope.$state   = $state;

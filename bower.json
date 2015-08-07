@@ -1,6 +1,6 @@
 {
     "name"          : "NetChat",
-    "description"   : "Client application for the chat developed for the Tuts+ series in RESTful API with NodeJS and ExpressJS.",
+    "description"   : "Client application for the NetChat application.",
     "version"       : "1.0.0",
     "private"       : true,
     "dependencies"  : {

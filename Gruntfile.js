@@ -1,6 +1,185 @@
-module.exports = function( grunt ) {
+'use strict';
+
+module.exports  = function ( grunt ) {
+
+    var appConfig   = {
+        app         : 'app',
+        dist        : 'dist',
+        livereload  : 35729
+    };
+
+    require( 'load-grunt-tasks' )( grunt );
+    require( 'time-grunt' )( grunt );
+
     grunt.initConfig({
-        less        : {
+        config                  : appConfig,
+        cdnify                  : {
+            dist    : {
+                html    : '<%= config.dist %>/*.html'
+            }
+        },
+        concurrent              : {
+            dist    : [
+                'less',
+                'imagemin',
+                'svgmin'
+            ],
+            server  : [
+                'less'
+            ]
+        },
+        connect                 : {
+            options : {
+                port            : 9000,
+                hostname        : 'localhost',
+                livereload      : '<%= config.livereload %>'
+            },
+            dev     : {
+                options         : {
+                    open        : true,
+                    middleware  : function ( connect ) {
+                        return [
+                            connect().use( '/bower_components', connect.static( './bower_components' ) ),
+                            connect().use( '/fonts', connect.static( './bower_components/bootstrap/fonts' ) ),
+                            connect.static( appConfig.app )
+                        ];
+                    }
+                }
+            },
+            test    : {
+                options         : {
+                    port        : 9001,
+                    middleware  : function ( connect ) {
+                        return [
+                            connect().use( '/bower_components', connect.static( './bower_components' ) ),
+                            connect().use( '/js', connect.static( 'instrumented/app/js' ) ),
+                            connect.static( appConfig.app )
+                        ];
+                    }
+                }
+            }
+        },
+        copy                    : {
+            dist    : {
+                files   : [{
+                    expand  : true,
+                    dot     : true,
+                    cwd     : '<%= config.app %>',
+                    dest    : '<%= config.dist %>',
+                    src     : [
+                        '*.{ico,png,txt}',
+                        '.htaccess',
+                        '*.html',
+                        'partials/{,*/}*.html',
+                        'img/{,*/}*.{webp}',
+                        'css/{,*/}*.css',
+                        'data/{,*/}*.*',
+                        'CNAME'
+                    ]
+                }, {
+                    expand  : true,
+                    flatten : true,
+                    cwd     : '.',
+                    src     : 'bower_components/bootstrap/fonts/*',
+                    dest    : '<%= config.dist %>/fonts'
+                }, {
+                    expand  : true,
+                    cwd     : '.',
+                    src     : 'bower_components/requirejs/require.js',
+                    dest    : '<%= config.dist %>'
+                }]
+            }
+        },
+        coveralls               : {
+            options : {
+                force   : true
+            },
+            target  : {
+                src     : 'test/reports/lcov.info'
+            }
+        },
+        clean                   : {
+            dist: {
+                files: [{
+                    dot : true,
+                    src : [
+                        '.tmp',
+                        '<%= config.dist %>/{,*/}*',
+                        '!<%= config.dist %>/.git{,*/}*'
+                    ]
+                }]
+            },
+            server  : [
+                '.tmp',
+                '<%= config.app %>/css',
+                'instrumented',
+                'test/coverage',
+                'test/reports'
+            ]
+        },
+        eslint                  : {
+            src     : [
+                'Gruntfile.js',
+                '<%= config.app %>/js/{,*/}*.js',
+                '!<%= config.app %>/js/lib/*.js'
+            ]
+        },
+        filerev                 : {
+            dist    : {
+                src : [
+                    '<%= config.dist %>/js/vendor.js',
+                    '<%= config.dist %>/css/{,*/}*.css',
+                    '<%= config.dist %>/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                ]
+            }
+        },
+        'gh-pages'              : {
+            options     : {
+                base    : '<%= config.dist %>'
+            },
+            src         : [ '**' ]
+        },
+        htmlmin                 : {
+            dist    : {
+                options: {
+                    collapseWhitespace          : true,
+                    conservativeCollapse        : true,
+                    collapseBooleanAttributes   : true,
+                    removeCommentsFromCDATA     : true,
+                    removeOptionalTags          : true
+                },
+                files   : [{
+                    expand  : true,
+                    cwd     : '<%= config.dist %>',
+                    src     : [
+                        '*.html',
+                        'partials/{,*/}*.html'
+                    ],
+                    dest    : '<%= config.dist %>'
+                }]
+            }
+        },
+        imagemin                : {
+            dist    : {
+                files   : [{
+                    expand  : true,
+                    cwd     : '<%= config.app %>/img',
+                    src     : '{,*/}*.{png,jpg,jpeg,gif}',
+                    dest    : '<%= config.dist %>/img'
+                }]
+            }
+        },
+        instrument              : {
+            files   : [
+                '<%= config.app %>/js/**/*.js',
+                '!<%= config.app %>/js/lib/*.js'
+            ],
+            options : {
+                lazy        : true,
+                basePath    : 'instrumented'
+            }
+        },
+        less                    : {
             development : {
                 options : {
                     compress        : true,
@@ -8,61 +187,186 @@ module.exports = function( grunt ) {
                     optimization    : 2
                 },
                 files   : {
-                    "app/css/style.css" : "app/less/style.less"
+                    '<%= config.app %>/css/style.css'   : '<%= config.app %>/less/style.less'
                 }
             }
         },
-        ngconstant  : {
+        makeReport              : {
+            src     : 'test/coverage/**/*.json',
+            options : {
+                type    : 'lcov',
+                dir     : 'test/reports',
+                print   : 'detail'
+            }
+        },
+        ngAnnotate              : {
+            dist    : {
+                files   : [{
+                    expand  : true,
+                    cwd     : '.tmp/concat/scripts',
+                    src     : ['*.js', '!oldieshim.js'],
+                    dest    : '.tmp/concat/scripts'
+                }]
+            }
+        },
+        postcss                 : {
+            options : {
+                map         : false,
+                processors  : [
+                    require( 'autoprefixer-core' )({
+                        browsers    : 'last 8 versions'
+                    })
+                ]
+            },
+            dist    : {
+                src : '<%= config.app %>/css/*.css'
+            }
+        },
+        protractorCoverage      : {
             options     : {
-                space   : ' ',
-                wrap    : '"use strict";\n\n {%= __ngModule %}',
-                name    : 'config'
-            },
-            development : {
-                options     : {
-                    dest        : 'app/js/config.js'
-                },
-                constants   : {
-                    config  : {
-                        api_url     : 'http://localhost:3000/',
-                        consumer    : '54a9ab83120cafcd74bb0da5',
-                        secret      : 'J5e2fprVoXJpN1ycPiDP5Xz3howQKZer',
-                        static_url  : 'http://localhost:3000/',
-                        s3_uploads  : true
-                    }
+                configFile  : 'e2e-tests/protractor.conf.js',
+                noColor     : false,
+                coverageDir : 'e2e-tests/coverage',
+                args        : {
+                    browser : 'firefox'
                 }
             },
-            server      : {
-                options     : {
-                    dest        : 'app/js/config.js'
-                },
-                constants   : {
-                    config  : {
-                        api_url     : 'http://api-netchat.bitslice.net/',
-                        consumer    : '54a9ab83120cafcd74bb0da5',
-                        secret      : 'J5e2fprVoXJpN1ycPiDP5Xz3howQKZer',
-                        static_url  : 'http://api-netchat.bitslice.net/',
-                        s3_uploads  : true
+            test        : {
+                options : {
+                    configFile  : 'e2e-tests/protractor.conf.js',
+                    args        : {}
+                }
+            }
+        },
+        protractorWebdriver     : {
+            test    : {
+                path    : 'node_modules/protractor/bin/',
+                command : 'webdriver-manager start'
+            }
+        },
+        requirejs               : {
+            compile : {
+                options : {
+                    baseUrl                 : '<%= config.app %>/js',
+                    mainConfigFile          : '<%= config.app %>/js/main.js',
+                    name                    : 'main',
+                    out                     : '<%= config.dist %>/js/main.js',
+                    preserveLicenseComments : false,
+                    removeCombined          : true
+                }
+            }
+        },
+        svgmin                  : {
+            dist    : {
+                files   : [{
+                    expand  : true,
+                    cwd     : '<%= config.app %>/img',
+                    src     : '{,*/}*.svg',
+                    dest    : '<%= config.dist %>/img'
+                }]
+            }
+        },
+        usemin                  : {
+            html    : [
+                '<%= config.dist %>/{,*/}*.html',
+                '<%= config.dist %>/partials/{,*/}*.html'
+            ],
+            css     : [
+                '<%= config.dist %>/css/{,*/}*.css'
+            ],
+            options : {
+                assetsDirs  : [
+                    '<%= config.dist %>',
+                    '<%= config.dist %>/img',
+                    '<%= config.dist %>/css'
+                ]
+            }
+        },
+        useminPrepare           : {
+            html    : '<%= config.app %>/index.html',
+            options : {
+                dest    : '<%= config.dist %>',
+                flow    : {
+                    html: {
+                        steps   : {
+                            js  : ['concat', 'uglifyjs'],
+                            css : ['cssmin']
+                        },
+                        post: {}
                     }
                 }
             }
         },
-        watch       : {
+        watch                   : {
             styles      : {
-                files   : ['app/less/**/*.less'], // which files to watch
-                tasks   : ['less'],
+                files   : [ '<%= config.app %>/less/**/*.less' ],
+                tasks   : [ 'less', 'postcss' ],
                 options : {
-                    nospawn : true
+                    spawn       : false,
+                    livereload  : '<%= config.livereload %>'
                 }
+            },
+            js          : {
+                files   : [ '<%= config.app %>/js/**/*.js' ],
+                options : {
+                    spawn       : false,
+                    livereload  : '<%= config.livereload %>'
+                }
+            }
+        },
+        wiredep                 : {
+            app : {
+                src         : [ '<%= config.app %>/index.html' ],
+                exclude     : [ 'require.js' ],
+                ignorePath  :  /\.\.\//
             }
         }
     });
 
-    grunt.loadNpmTasks( 'grunt-contrib-less' );
-    grunt.loadNpmTasks( 'grunt-contrib-watch' );
-    grunt.loadNpmTasks( 'grunt-ng-constant' );
+    grunt.task.renameTask( 'protractor_coverage', 'protractorCoverage' );
+    grunt.task.renameTask( 'protractor_webdriver', 'protractorWebdriver' );
+    grunt.loadNpmTasks( 'gruntify-eslint' );
 
-    grunt.registerTask( 'default', [ 'watch' ] );
-    grunt.registerTask( 'development', [ 'ngconstant:development' ] );
-    grunt.registerTask( 'server', [ 'ngconstant:server' ] );
+    grunt.registerTask( 'build', [
+        'clean:dist',
+        'wiredep',
+        'useminPrepare',
+        'concurrent:dist',
+        'postcss',
+        'concat',
+        'ngAnnotate',
+        'requirejs',
+        'copy:dist',
+        'cdnify',
+        'uglify',
+        'filerev',
+        'usemin',
+        'htmlmin'
+    ]);
+    grunt.registerTask( 'publish', [
+        'build',
+        'gh-pages'
+    ]);
+    grunt.registerTask( 'report', [
+        'coveralls'
+    ]);
+    grunt.registerTask( 'serve', [
+        'clean:server',
+        'wiredep',
+        'concurrent:server',
+        'postcss',
+        'connect:dev',
+        'watch'
+    ]);
+    grunt.registerTask( 'test', [
+        'clean:server',
+        'wiredep',
+        'concurrent:server',
+        'postcss',
+        'instrument',
+        'connect:test',
+        'protractorWebdriver:test',
+        'protractorCoverage:test',
+        'makeReport'
+    ]);
 };
