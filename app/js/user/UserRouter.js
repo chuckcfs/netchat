@@ -7,7 +7,7 @@ define( function ( require ) {
                 url     : 'register',
                 views   : {
                     'contentBody'       : {
-                        templateUrl     : 'partials/user/register',
+                        templateUrl     : 'partials/user/register.html',
                         controller      : 'UserRegisterCtrl'
                     }
                 }
