@@ -12,5 +12,16 @@
         "bootstrap"                     : "3.3.x",
         "blueimp-file-upload"           : "9.9.x",
         "requirejs"                     : "2.1.x"
+    },
+    "overrides"         : {
+        "blueimp-file-upload"   : {
+            "main"      : [
+                "js/vendor/jquery.ui.widget.js",
+                "js/jquery.fileupload.js"
+            ]
+        },
+        "blueimp-tmpl"          : {
+            "main"      : "js/404.js"
+        }
     }
 }
