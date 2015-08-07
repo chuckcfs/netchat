@@ -7,4 +7,7 @@ tmp
 .idea
 app/bower_components
 app/js/config.js
-build/
+dist/
+app/css/style.css
+e2e-tests/coverage*
+e2e-tests/reports

@@ -192,10 +192,10 @@ module.exports  = function ( grunt ) {
             }
         },
         makeReport              : {
-            src     : 'test/coverage/**/*.json',
+            src     : 'e2e-tests/coverage/**/*.json',
             options : {
                 type    : 'lcov',
-                dir     : 'test/reports',
+                dir     : 'e2e-tests/reports',
                 print   : 'detail'
             }
         },
